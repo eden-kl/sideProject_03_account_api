@@ -3,9 +3,17 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
 class AccountController extends Controller
 {
-    //
+    /**
+     * @return array
+     */
+    public function getList(): array
+    {
+        return [
+            'status' => 200,
+            'message' => 'request allow',
+        ];
+    }
 }
