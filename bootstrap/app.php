@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 use App\Http\Middleware\IpValidator;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -18,5 +19,11 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        //
+        $exceptions->render(function (Throwable $exception, Request $request) {
+            $defaultErrorStatus = [
+                'status' => $exception->getStatusCode(),
+                'description' => '[Handler] ' . $exception->getMessage()
+            ];
+            return response()->json($defaultErrorStatus, $exception->getStatusCode());
+        });
     })->create();
