@@ -26,6 +26,10 @@ class IpValidator
         return $next($request);
     }
 
+    /**
+     * @param string $ip
+     * @return bool
+     */
     private function ipIsValid(string $ip): bool
     {
         $longIp = ip2long($ip);
