@@ -2,18 +2,26 @@
 
 namespace App\Http\Controllers\Api\v1;
 
+use App\Formatters\Formatter;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\JsonResponse;
 
 class AccountController extends Controller
 {
-    /**
-     * @return array
-     */
-    public function getList(): array
+    protected Formatter $formatter;
+    public function __construct(Formatter $formatter)
     {
-        return [
-            'status' => 200,
-            'message' => 'request allow',
-        ];
+        $this->formatter = $formatter;
+    }
+
+    /**
+     * @return JsonResponse
+     */
+    public function getList(): JsonResponse
+    {
+        return $this->formatter->formatResponse([
+            'status' => '0000',
+            'description' => 'allow',
+        ]);
     }
 }
