@@ -20,6 +20,11 @@ final class StatusMessage
             'description' => 'Success',
             'httpCode' => Response::HTTP_OK,
         ],
+        self::CODE_PARAMETER_ERROR => [
+            'statusCode' => self::CODE_PARAMETER_ERROR,
+            'description' => '參數錯誤',
+            'httpCode' => Response::HTTP_BAD_REQUEST,
+        ],
         self::CODE_ERROR => [
             'statusCode' => self::CODE_ERROR,
             'description' => 'Error',
@@ -28,6 +33,7 @@ final class StatusMessage
     ];
 
     public const CODE_ALL_SUCCESS = '0000';
+    public const CODE_PARAMETER_ERROR = 'E001';
     public const CODE_ERROR = 'E999';
 
     /**
