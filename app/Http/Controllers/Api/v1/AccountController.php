@@ -34,6 +34,10 @@ class AccountController extends Controller
         return $this->formatter->formatResponse($response);
     }
 
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function createAccount(Request $request): JsonResponse
     {
         $validations = $this->checkRequest($request);
@@ -41,9 +45,18 @@ class AccountController extends Controller
             $description = implode(',', $validations);
             return $this->formatter->formatResponse(['status' => StatusMessage::CODE_PARAMETER_ERROR, 'description' => $description]);
         }
-        return $this->formatter->formatResponse([]);
+        $requestBody = [
+            'account' => $request->input('data.account'),
+            'password' => $request->input('data.password'),
+        ];
+        $response = $this->accountService->createAccount($requestBody);
+        return $this->formatter->formatResponse($response);
     }
 
+    /**
+     * @param Request $request
+     * @return array
+     */
     private function checkRequest(Request $request): array
     {
         $description = [];

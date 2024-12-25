@@ -10,4 +10,5 @@ class Account extends Model
     protected $primaryKey = 'account';
     public $incrementing = false;
     protected $keyType = 'string';
+    protected $fillable = ['account', 'password'];
 }

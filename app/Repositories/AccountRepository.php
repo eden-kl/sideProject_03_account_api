@@ -2,13 +2,14 @@
 /**
  * Account repository
  *
- * @version 0.1.2
+ * @version 0.1.4
  * @author eden.chen eden.chen@kkday.com
  * @date 2024/12/25
  * @since 0.1.0 2024/12/25 eden.chen: 新建立AccountRepository class
  * @since 0.1.1 2024/12/25 eden.chen: 新增phpDoc
  * @since 0.1.2 2024/12/25 eden.chen: 改用array回傳
  * @since 0.1.3 2024/12/25 eden.chen: 移除不用的use
+ * @since 0.1.4 2024/12/25 eden.chen: 修改create回傳格式為void
  */
 
 namespace App\Repositories;
@@ -29,11 +30,11 @@ class AccountRepository implements CRUDRepositoryInterface
 
     /**
      * @param array $data
-     * @return Account
+     * @return void
      */
-    public function create(array $data): Account
+    public function create(array $data): void
     {
-        return Account::create($data);
+        Account::create($data);
     }
 
     /**
