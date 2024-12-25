@@ -18,10 +18,9 @@ class Formatter
 {
     /**
      * @param $response
-     * @param int $httpCode
      * @return JsonResponse
      */
-    public function formatResponse($response, int $httpCode = Response::HTTP_OK): JsonResponse
+    public function formatResponse($response): JsonResponse
     {
         $statusCode = $response['status'] ?? StatusMessage::CODE_ERROR;
         $description = $response['description'] ?? StatusMessage::getDescription($statusCode);
@@ -36,16 +35,16 @@ class Formatter
         ];
 
         if ($statusCode === StatusMessage::CODE_ALL_SUCCESS) {
-            if (isset($response['data'])) {
-                $result['data'] = empty($response['data']) ? (object)[] : $response['data'];
+            if (!empty($response['data'])) {
+                $result['data'] = $response['data'];
             }
 
             $httpCode = Response::HTTP_CREATED;
         }
 
-        $headers = array(
+        $headers = [
             'Content-Type' => 'application/json; charset=utf-8'
-        );
+        ];
         return response()->json($result, $httpCode, $headers, JSON_UNESCAPED_UNICODE);
     }
 }
