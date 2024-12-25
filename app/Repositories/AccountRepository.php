@@ -8,12 +8,12 @@
  * @since 0.1.0 2024/12/25 eden.chen: 新建立AccountRepository class
  * @since 0.1.1 2024/12/25 eden.chen: 新增phpDoc
  * @since 0.1.2 2024/12/25 eden.chen: 改用array回傳
+ * @since 0.1.3 2024/12/25 eden.chen: 移除不用的use
  */
 
 namespace App\Repositories;
 
 use App\Models\Account;
-use Illuminate\Database\Eloquent\Collection;
 use LaravelIdea\Helper\App\Models\_IH_Account_C;
 
 class AccountRepository implements CRUDRepositoryInterface
