@@ -10,7 +10,7 @@
 
 namespace App\Formatters;
 
-use App\Formatters\Response\statusMessage;
+use App\Formatters\Response\StatusMessage;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 

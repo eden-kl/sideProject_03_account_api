@@ -12,7 +12,7 @@ namespace App\Formatters\Response;
 
 use Symfony\Component\HttpFoundation\Response;
 
-final class statusMessage
+final class StatusMessage
 {
     private const CODE_MAPPING = [
         self::CODE_ALL_SUCCESS => [
