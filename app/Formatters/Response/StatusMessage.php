@@ -17,17 +17,17 @@ final class StatusMessage
     private const CODE_MAPPING = [
         self::CODE_ALL_SUCCESS => [
             'statusCode' => self::CODE_ALL_SUCCESS,
-            'description' => 'Success',
+            'message' => 'Success',
             'httpCode' => Response::HTTP_OK,
         ],
         self::CODE_PARAMETER_ERROR => [
             'statusCode' => self::CODE_PARAMETER_ERROR,
-            'description' => '參數錯誤',
+            'message' => '參數錯誤',
             'httpCode' => Response::HTTP_BAD_REQUEST,
         ],
         self::CODE_ERROR => [
             'statusCode' => self::CODE_ERROR,
-            'description' => 'Error',
+            'message' => 'Error',
             'httpCode' => Response::HTTP_OK,
         ],
     ];
@@ -40,9 +40,9 @@ final class StatusMessage
      * @param string|null $code
      * @return string
      */
-    public static function getDescription(string $code = null): string
+    public static function getMessage(string $code = null): string
     {
-        return self::CODE_MAPPING[$code]['description'];
+        return self::CODE_MAPPING[$code]['message'];
     }
 
     /**

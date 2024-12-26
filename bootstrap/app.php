@@ -25,7 +25,7 @@ return Application::configure(basePath: dirname(__DIR__))
             $formatter = new Formatter();
             $defaultErrorStatus = [
                 'status' => StatusMessage::CODE_ERROR,
-                'description' => '[Handler] ' . $exception->getMessage()
+                'message' => '[Handler] ' . $exception->getMessage()
             ];
             return $formatter->formatResponse($defaultErrorStatus);
         });

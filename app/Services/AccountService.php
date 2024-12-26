@@ -46,7 +46,7 @@ class AccountService
         $this->accountRepository->create($data);
         return [
             'status' => StatusMessage::CODE_ALL_SUCCESS,
-            'description' => 'Account:[' . $data['account'] . '] created',
+            'message' => 'Account:[' . $data['account'] . '] 已建立。',
         ];
     }
 }

@@ -42,8 +42,8 @@ class AccountController extends Controller
     {
         $validations = $this->checkRequest($request);
         if ($validations) {
-            $description = implode(',', $validations);
-            return $this->formatter->formatResponse(['status' => StatusMessage::CODE_PARAMETER_ERROR, 'description' => $description]);
+            $message = implode(',', $validations);
+            return $this->formatter->formatResponse(['status' => StatusMessage::CODE_PARAMETER_ERROR, 'message' => $message]);
         }
         $requestBody = [
             'account' => $request->input('data.account'),
@@ -59,7 +59,7 @@ class AccountController extends Controller
      */
     private function checkRequest(Request $request): array
     {
-        $description = [];
+        $messages = [];
         $validation = Validator::make($request->all(), [
             'data.account' => 'required',
             'data.password' => 'required',
@@ -70,10 +70,10 @@ class AccountController extends Controller
         ]);
         if ($validation->fails()) {
             $errors = $validation->errors();
-            foreach ($errors->all() as $message) {
-                $description[] = $message;
+            foreach ($errors->all() as $errorMsg) {
+                $messages[] = $errorMsg;
             }
         }
-        return $description;
+        return $messages;
     }
 }

@@ -23,14 +23,14 @@ class Formatter
     public function formatResponse($response): JsonResponse
     {
         $statusCode = $response['status'] ?? StatusMessage::CODE_ERROR;
-        $description = $response['description'] ?? StatusMessage::getDescription($statusCode);
+        $message = $response['message'] ?? StatusMessage::getMessage($statusCode);
         $httpCode = StatusMessage::getHttpCode($statusCode);
-        $description = str_replace('\u0000', '', $description);
+        $message = str_replace('\u0000', '', $message);
 
         $result =  [
             'metadata' =>   [
                 "status"        =>  $statusCode,
-                "description"   =>  $description
+                "message"   =>  $message
             ]
         ];
 
