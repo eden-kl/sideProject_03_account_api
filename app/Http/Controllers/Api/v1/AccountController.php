@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Api\v1;
 
-use App\Enums\StatusCode;
 use App\Exceptions\AccountException;
+use App\Exceptions\HttpRequestCustomException;
 use App\Formatters\Formatter;
 use App\Http\Controllers\Controller;
 use App\Services\AccountService;
+use App\Validations\HttpRequestValidation;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class AccountController extends Controller
 {
@@ -39,43 +39,16 @@ class AccountController extends Controller
      * @param Request $request
      * @return JsonResponse
      * @throws AccountException
+     * @throws HttpRequestCustomException
      */
     public function createAccount(Request $request): JsonResponse
     {
-        $validations = $this->checkRequest($request);
-        if ($validations) {
-            $message = implode(',', $validations);
-            return $this->formatter->formatResponse(['status' => StatusCode::parameterError->value, 'message' => $message]);
-        }
+        HttpRequestValidation::checkRequest($request, config('validation_rules.account'));
         $requestBody = [
             'account' => $request->input('data.account'),
             'password' => $request->input('data.password'),
         ];
         $response = $this->accountService->createAccount($requestBody);
         return $this->formatter->formatResponse($response);
-    }
-
-    /**
-     * @param Request $request
-     * @return array
-     */
-    private function checkRequest(Request $request): array
-    {
-        $messages = [];
-        $validation = Validator::make($request->all(), [
-            'data.account' => 'required',
-            'data.password' => 'required',
-        ],
-        [
-            'data.account.required' => 'account:帳號為必填',
-            'data.password.required' => 'password:密碼為必填',
-        ]);
-        if ($validation->fails()) {
-            $errors = $validation->errors();
-            foreach ($errors->all() as $errorMsg) {
-                $messages[] = $errorMsg;
-            }
-        }
-        return $messages;
     }
 }
