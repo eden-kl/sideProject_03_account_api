@@ -11,7 +11,8 @@
 
 namespace App\Services;
 
-use App\Formatters\Response\StatusMessage;
+use App\Enums\StatusCode;
+use App\Exceptions\AccountException;
 use App\Repositories\AccountRepository;
 
 class AccountService
@@ -32,7 +33,7 @@ class AccountService
     public function getAll(): array
     {
         return [
-            'status' => StatusMessage::CODE_ALL_SUCCESS,
+            'status' => StatusCode::allSuccess->value,
             'data' => $this->accountRepository->all(),
         ];
     }
@@ -40,12 +41,17 @@ class AccountService
     /**
      * @param array $data
      * @return array
+     * @throws AccountException
      */
     public function createAccount(array $data): array
     {
+        $account = $this->accountRepository->find($data['account']);
+        if ($account !== []) {
+            throw AccountException::requestFailed('此帳號已存在。');
+        }
         $this->accountRepository->create($data);
         return [
-            'status' => StatusMessage::CODE_ALL_SUCCESS,
+            'status' => StatusCode::allSuccess->value,
             'message' => 'Account:[' . $data['account'] . '] 已建立。',
         ];
     }

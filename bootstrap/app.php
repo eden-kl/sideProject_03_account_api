@@ -2,7 +2,6 @@
 
 use App\Formatters\Formatter;
 use App\Formatters\Response\StatusMessage;
-use Illuminate\Http\Request;
 use App\Http\Middleware\IpValidator;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -21,11 +20,11 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        $exceptions->render(function (Throwable $exception, Request $request) {
+        $exceptions->render(function (Throwable $exception) {
             $formatter = new Formatter();
             $defaultErrorStatus = [
-                'status' => StatusMessage::CODE_ERROR,
-                'message' => '[Handler] ' . $exception->getMessage()
+                'status' => StatusMessage::getStatusCode($exception->getCode()),
+                'message' => '[Exception]' . $exception->getMessage()
             ];
             return $formatter->formatResponse($defaultErrorStatus);
         });

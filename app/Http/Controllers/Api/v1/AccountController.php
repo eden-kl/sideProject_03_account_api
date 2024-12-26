@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Api\v1;
 
+use App\Enums\StatusCode;
+use App\Exceptions\AccountException;
 use App\Formatters\Formatter;
-use App\Formatters\Response\StatusMessage;
 use App\Http\Controllers\Controller;
 use App\Services\AccountService;
 use Illuminate\Http\JsonResponse;
@@ -37,13 +38,14 @@ class AccountController extends Controller
     /**
      * @param Request $request
      * @return JsonResponse
+     * @throws AccountException
      */
     public function createAccount(Request $request): JsonResponse
     {
         $validations = $this->checkRequest($request);
         if ($validations) {
             $message = implode(',', $validations);
-            return $this->formatter->formatResponse(['status' => StatusMessage::CODE_PARAMETER_ERROR, 'message' => $message]);
+            return $this->formatter->formatResponse(['status' => StatusCode::parameterError->value, 'message' => $message]);
         }
         $requestBody = [
             'account' => $request->input('data.account'),
