@@ -8,13 +8,22 @@ use Exception;
 class AccountException extends Exception
 {
 
-    public function __construct(string $message, string $errorCode = null, bool $prefix = true)
+    /**
+     * @param string $message
+     * @param string|null $errorCode
+     * @param bool $isPrefix
+     */
+    public function __construct(string $message, string $errorCode = null, bool $isPrefix = true)
     {
         $errorCode = $errorCode ? StatusCode::from($errorCode)->transformStatusCode() : StatusCode::error->transformStatusCode();
-        $message = $prefix ? '[System|User]' . $message : $message;
+        $message = $isPrefix ? '[System|User]' . $message : $message;
         parent::__construct($message, $errorCode);
     }
 
+    /**
+     * @param string $message
+     * @return AccountException
+     */
     public static function requestFailed(string $message): AccountException
     {
         return new self($message, StatusCode::accountDuplicated->value);
