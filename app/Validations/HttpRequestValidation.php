@@ -31,7 +31,7 @@ class HttpRequestValidation
             foreach ($errors->all() as $errorMsg) {
                 $messages[] = $errorMsg;
             }
-            throw new HttpRequestCustomException(implode(',', $messages));
+            throw HttpRequestCustomException::requestFailed(implode(',', $messages));
         }
     }
 }

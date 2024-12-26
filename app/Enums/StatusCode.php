@@ -5,8 +5,8 @@ namespace App\Enums;
 enum StatusCode: string
 {
     case allSuccess = '0000';
-    case parameterError = 'E001';
-    case accountDuplicated = 'E101';
+    case parameterError = 'E101';
+    case accountDuplicated = 'E201';
     case error = 'E999';
 
     /**
