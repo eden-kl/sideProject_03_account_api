@@ -43,7 +43,7 @@ class AccountRepository implements CRUDRepositoryInterface
      */
     public function update($pk, array $data): Account
     {
-        $account = Account::findOrFail($pk);
+        $account = Account::find($pk);
         $account->update($data);
         return $account;
     }
