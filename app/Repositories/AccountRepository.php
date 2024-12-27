@@ -15,7 +15,6 @@
 namespace App\Repositories;
 
 use App\Models\Account;
-use LaravelIdea\Helper\App\Models\_IH_Account_C;
 
 class AccountRepository implements CRUDRepositoryInterface
 {
