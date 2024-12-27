@@ -29,6 +29,10 @@ final class StatusMessage
             'message' => '帳號名稱重複',
             'httpCode' => Response::HTTP_OK,
         ],
+        StatusCode::accountNotFound->value => [
+            'message' => '查無此帳號',
+            'httpCode' => Response::HTTP_OK,
+        ],
         StatusCode::error->value => [
             'message' => 'Error',
             'httpCode' => Response::HTTP_OK,

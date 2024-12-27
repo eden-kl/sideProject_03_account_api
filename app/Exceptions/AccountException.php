@@ -28,4 +28,13 @@ class AccountException extends Exception
     {
         return new self($message, StatusCode::accountDuplicated->value);
     }
+
+    /**
+     * @param string $message
+     * @return AccountException
+     */
+    public static function notFound(string $message): AccountException
+    {
+        return new self($message, StatusCode::accountNotFound->value);
+    }
 }
