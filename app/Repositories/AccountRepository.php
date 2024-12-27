@@ -40,9 +40,9 @@ class AccountRepository implements CRUDRepositoryInterface
     /**
      * @param $pk
      * @param array $data
-     * @return Account|_IH_Account_C|array
+     * @return Account
      */
-    public function update($pk, array $data): Account|_IH_Account_C|array
+    public function update($pk, array $data): Account
     {
         $account = Account::findOrFail($pk);
         $account->update($data);
@@ -61,10 +61,10 @@ class AccountRepository implements CRUDRepositoryInterface
 
     /**
      * @param $pk
-     * @return array
+     * @return Account|null
      */
-    public function find($pk): array
+    public function find($pk): ?Account
     {
-        return Account::findOrFail($pk)->toArray();
+        return Account::find($pk);
     }
 }

@@ -10,6 +10,7 @@ use App\Services\AccountService;
 use App\Validations\HttpRequestValidation;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AccountController extends Controller
 {
@@ -46,7 +47,7 @@ class AccountController extends Controller
         HttpRequestValidation::checkRequest($request, config('validation_rules.account'));
         $requestBody = [
             'account' => $request->input('data.account'),
-            'password' => $request->input('data.password'),
+            'password' => Hash::make($request->input('data.password')),
         ];
         $response = $this->accountService->createAccount($requestBody);
         return $this->formatter->formatResponse($response);

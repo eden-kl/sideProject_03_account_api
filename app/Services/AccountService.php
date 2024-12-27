@@ -46,7 +46,7 @@ class AccountService
     public function createAccount(array $data): array
     {
         $account = $this->accountRepository->find($data['account']);
-        if ($account !== []) {
+        if ($account !== null) {
             throw AccountException::requestFailed('此帳號已存在。');
         }
         $this->accountRepository->create($data);
