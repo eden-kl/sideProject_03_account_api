@@ -69,9 +69,15 @@ class AccountController extends Controller
      * @param string $account
      * @return JsonResponse
      * @throws HttpRequestCustomException
+     * @throws AccountException
      */
     public function updateAccount(Request $request, string $account): JsonResponse
     {
         HttpRequestValidation::checkRequest($request, config('validation_rules.account.update'));
+        $requestBody = [
+            'password' => Hash::make($request->input('data.newPassword')),
+        ];
+        $response = $this->accountService->updateAccount($account, $requestBody);
+        return $this->formatter->formatResponse($response);
     }
 }
