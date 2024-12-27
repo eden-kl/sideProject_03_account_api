@@ -52,7 +52,7 @@ class AccountService
         $this->accountRepository->create($data);
         return [
             'status' => StatusCode::allSuccess->value,
-            'message' => 'Account:[' . $data['account'] . '] 已建立。',
+            'message' => '帳號：[' . $data['account'] . '] 已建立。',
         ];
     }
 
