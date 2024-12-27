@@ -10,13 +10,15 @@
 
 return [
     'account' => [
-        'rules' => [
-            'data.account' => 'required',
-            'data.password' => 'required',
-        ],
-        'errorMessages' => [
-            'data.account.required' => 'account:帳號為必填',
-            'data.password.required' => 'password:密碼為必填',
+        'create' => [
+            'rules' => [
+                'data.account' => 'required',
+                'data.password' => 'required',
+            ],
+            'errorMessages' => [
+                'data.account.required' => 'account:帳號為必填',
+                'data.password.required' => 'password:密碼為必填',
+            ],
         ],
     ],
 ];

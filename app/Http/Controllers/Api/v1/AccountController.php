@@ -44,7 +44,7 @@ class AccountController extends Controller
      */
     public function createAccount(Request $request): JsonResponse
     {
-        HttpRequestValidation::checkRequest($request, config('validation_rules.account'));
+        HttpRequestValidation::checkRequest($request, config('validation_rules.account.create'));
         $requestBody = [
             'account' => $request->input('data.account'),
             'password' => Hash::make($request->input('data.password')),
