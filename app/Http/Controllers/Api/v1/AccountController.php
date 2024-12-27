@@ -63,4 +63,15 @@ class AccountController extends Controller
         $response = $this->accountService->deleteAccount($account);
         return $this->formatter->formatResponse($response);
     }
+
+    /**
+     * @param Request $request
+     * @param string $account
+     * @return JsonResponse
+     * @throws HttpRequestCustomException
+     */
+    public function updateAccount(Request $request, string $account): JsonResponse
+    {
+        HttpRequestValidation::checkRequest($request, config('validation_rules.account.update'));
+    }
 }

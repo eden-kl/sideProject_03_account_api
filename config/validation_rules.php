@@ -20,5 +20,13 @@ return [
                 'data.password.required' => 'password:密碼為必填',
             ],
         ],
+        'update' => [
+            'rules' => [
+                'data.newPassword' => 'required',
+            ],
+            'errorMessages' => [
+                'data.newPassword' => '新密碼為必填',
+            ],
+        ],
     ],
 ];
