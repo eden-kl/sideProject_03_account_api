@@ -64,7 +64,7 @@ class AccountService
     public function deleteAccount(string $account): array
     {
         $account = $this->accountRepository->find($account);
-        if ($account !== null) {
+        if ($account === null) {
             throw AccountException::notFound('查無此帳號。');
         }
         $this->accountRepository->delete($account);
