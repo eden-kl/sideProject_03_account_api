@@ -37,4 +37,13 @@ class AccountException extends Exception
     {
         return new self($message, StatusCode::accountNotFound->value);
     }
+
+    /**
+     * @param string $message
+     * @return AccountException
+     */
+    public static function passwordValidationFailed(string $message): AccountException
+    {
+        return new self($message, StatusCode::passwordDiff->value);
+    }
 }
