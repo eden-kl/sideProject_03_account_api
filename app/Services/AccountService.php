@@ -55,4 +55,22 @@ class AccountService
             'message' => 'Account:[' . $data['account'] . '] 已建立。',
         ];
     }
+
+    /**
+     * @param string $account
+     * @return array
+     * @throws AccountException
+     */
+    public function deleteAccount(string $account): array
+    {
+        $account = $this->accountRepository->find($account);
+        if ($account !== null) {
+            throw AccountException::notFound('查無此帳號。');
+        }
+        $this->accountRepository->delete($account);
+        return [
+            'status' => StatusCode::allSuccess->value,
+            'message' => '帳號：[' . $account . '] 已成功刪除。',
+        ];
+    }
 }

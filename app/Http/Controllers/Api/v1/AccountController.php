@@ -52,4 +52,15 @@ class AccountController extends Controller
         $response = $this->accountService->createAccount($requestBody);
         return $this->formatter->formatResponse($response);
     }
+
+    /**
+     * @param string $account
+     * @return JsonResponse
+     * @throws AccountException
+     */
+    public function deleteAccount(string $account): JsonResponse
+    {
+        $response = $this->accountService->deleteAccount($account);
+        return $this->formatter->formatResponse($response);
+    }
 }

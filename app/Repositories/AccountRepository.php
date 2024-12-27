@@ -54,7 +54,7 @@ class AccountRepository implements CRUDRepositoryInterface
      */
     public function delete($pk): void
     {
-        $account = Account::findOrFail($pk);
+        $account = Account::find($pk);
         $account->delete();
     }
 
