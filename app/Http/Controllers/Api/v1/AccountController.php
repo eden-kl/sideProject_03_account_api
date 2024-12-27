@@ -37,6 +37,17 @@ class AccountController extends Controller
     }
 
     /**
+     * @param string $account
+     * @return JsonResponse
+     * @throws AccountException
+     */
+    public function getOne(string $account): JsonResponse
+    {
+        $response = $this->accountService->getOne($account);
+        return $this->formatter->formatResponse($response);
+    }
+
+    /**
      * @param Request $request
      * @return JsonResponse
      * @throws AccountException

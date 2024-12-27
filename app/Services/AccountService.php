@@ -40,6 +40,23 @@ class AccountService
     }
 
     /**
+     * @param string $account
+     * @return array
+     * @throws AccountException
+     */
+    public function getOne(string $account):array
+    {
+        $response = $this->accountRepository->find($account);
+        if ($response === null) {
+            throw AccountException::notFound('查無此帳號。');
+        }
+        return [
+            'status' => StatusCode::allSuccess->value,
+            'data' => $response,
+        ];
+    }
+
+    /**
      * @param array $data
      * @return array
      * @throws AccountException
