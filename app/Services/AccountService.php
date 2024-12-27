@@ -73,4 +73,23 @@ class AccountService
             'message' => '帳號：[' . $account . '] 已成功刪除。',
         ];
     }
+
+    /**
+     * @param string $account
+     * @param array $data
+     * @return array
+     * @throws AccountException
+     */
+    public function updateAccount(string $account, array $data): array
+    {
+        $response = $this->accountRepository->find($account);
+        if ($response === null) {
+            throw AccountException::notFound('查無此帳號。');
+        }
+        $this->accountRepository->update($account, $data);
+        return [
+            'status' => StatusCode::allSuccess->value,
+            'message' => '帳號：[' . $account . '] 的密碼已成功更新。',
+        ];
+    }
 }
