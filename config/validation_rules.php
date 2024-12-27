@@ -22,10 +22,12 @@ return [
         ],
         'update' => [
             'rules' => [
+                'data.password' => 'required',
                 'data.newPassword' => 'required',
             ],
             'errorMessages' => [
-                'data.newPassword' => '新密碼為必填',
+                'data.password' => 'password:密碼為必填',
+                'data.newPassword' => 'newPassword:新密碼為必填',
             ],
         ],
     ],
