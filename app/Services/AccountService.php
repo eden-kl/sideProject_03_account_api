@@ -14,6 +14,7 @@ namespace App\Services;
 use App\Enums\StatusCode;
 use App\Exceptions\AccountException;
 use App\Repositories\AccountRepository;
+use App\Validations\AccountValidation;
 
 class AccountService
 {
@@ -86,7 +87,8 @@ class AccountService
         if ($response === null) {
             throw AccountException::notFound('查無此帳號。');
         }
-        $this->accountRepository->update($account, $data);
+        AccountValidation::checkPassword($response, $data['password']);
+        $this->accountRepository->update($account, $data['update']);
         return [
             'status' => StatusCode::allSuccess->value,
             'message' => '帳號：[' . $account . '] 的密碼已成功更新。',

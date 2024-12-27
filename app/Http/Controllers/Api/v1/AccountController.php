@@ -75,7 +75,10 @@ class AccountController extends Controller
     {
         HttpRequestValidation::checkRequest($request, config('validation_rules.account.update'));
         $requestBody = [
-            'password' => Hash::make($request->input('data.newPassword')),
+            'update' => [
+                'password' => Hash::make($request->input('data.newPassword')),
+            ],
+            'password' => $request->input('data.password'),
         ];
         $response = $this->accountService->updateAccount($account, $requestBody);
         return $this->formatter->formatResponse($response);
